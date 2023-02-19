@@ -186,18 +186,19 @@ function App() {
           <div className="container">
             <div className="innerContainer">
               <div className="headerContainer">
-                <div className="headerElement">Rank</div>
+                <div className="headerElement">Pos.</div>
                 <div className="headerElement"></div>
-                <div className="headerElement_name">Name</div>
-                <div className="headerElement">Played</div>
-                <div className="headerElement">Won</div>
-                <div className="headerElement">Drawn</div>
-                <div className="headerElement">Lost</div>
-                <div className="headerElement">Goals +</div>
-                <div className="headerElement">Goals -</div>
-                <div className="headerElement">Goal +/-</div>
-                <div className="headerElement">Points</div>
+                <div className="headerElement_name">N</div>
+                <div className="headerElement">P</div>
+                <div className="headerElement">W</div>
+                <div className="headerElement">D</div>
+                <div className="headerElement">L</div>
+                <div className="headerElement">G+</div>
+                <div className="headerElement">G-</div>
+                <div className="headerElement">G+/-</div>
+                <div className="headerElement">Pts.</div>
               </div>
+              
               <div
                 style={{
                   display: "flex",
@@ -221,7 +222,15 @@ function App() {
                   {standings.map((standing: any) => (
                     <div key={standing.rank}>
                       {standing.rank >= 3 ? (
-                        <TablePositionView teamPosition={standing} />
+                         <div
+                         style={{
+                           display: "flex",
+                           alignItems: "center",
+                           justifyContent: "center",
+                         }}
+                       >
+                         <TablePositionView teamPosition={standing} />
+                       </div>
                       ) : (
                         " "
                       )}
@@ -229,19 +238,18 @@ function App() {
                   ))}
                 </>
               )}
-            
+             <button
+        className="showStandings_btn"
+        onClick={(e) => toggleShowCompleteStandings(e)}
+      >
+        Show complete standings...
+      </button>
             </div>
           </div>
         </>
       )}
 
       </div>
-      <button
-        className="showStandings_btn"
-        onClick={(e) => toggleShowCompleteStandings(e)}
-      >
-        Show complete standings...
-      </button>
       <Footer />
     </div>
   );

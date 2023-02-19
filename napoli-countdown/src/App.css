@@ -122,9 +122,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: 20%;
     }
     
+
     .showStandings_btn:hover {
         background: none;
         color: white;
@@ -183,9 +183,17 @@
         min-width: 100vh;
     }
 
+    .parentContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+    }
+
     .headerElement {
+        font-size: smaller;
         border-right: 1px solid transparent;
-        width: 75px;
+        width: 25px;
         height: 50px;
         display: flex;
         align-items: center;
@@ -194,13 +202,15 @@
     }
     
     .headerElement_name {
+        font-size: smaller;
         border-right: 1px solid transparent;
-        width: 100px;
+        width: 60px;
         height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
+        content: "ff";
     }
     
     .headerContainer {
@@ -211,6 +221,7 @@
         align-items: center;
         border-bottom: 2px solid rgb(100, 100, 100);
         position: relative;
+        margin-bottom: 10px;
     }
     
     .header {
@@ -224,13 +235,13 @@
         display: flex;
         justify-content: center;
         max-height: max-content;
-        scale: 0.4;
         position: relative;
     }
     
     .innerContainer {
         width: max-content;
     }
+
     
     .title {
         display: flex;
@@ -303,6 +314,7 @@
         background: none;
         color: gray;
         border: none;
+        font-size: smaller;
     }
     
     .showStandings_btn:hover {
