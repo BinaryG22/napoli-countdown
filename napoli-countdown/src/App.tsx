@@ -24,11 +24,9 @@ function App() {
   const [nextFixtures, setNextFixtures] = useState<any>();
 
   useEffect(() => {
-   
     fetchCurrentSerieAStandings();
 
     fetchNextFixturesToCome();
-    
   }, []);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ function App() {
 
   useEffect(() => {
     if (standings !== undefined) {
-
       let _statKeeperObj: statKeeper = {
         gamesInTotal: standings.length * 2 - 2,
         napoli_playedGames: standings[0].all.played,
@@ -81,18 +78,25 @@ function App() {
       {allSeasonData && (
         <div className="header">
           <div className="title">
-            <h1>ROAD TO SCUDETTO {allSeasonData.response[0].league.season}/{parseInt((allSeasonData.response[0].league.season) as string) + 1}</h1>
+            <h1>
+              ROAD TO SCUDETTO {allSeasonData.response[0].league.season}/
+              {parseInt(allSeasonData.response[0].league.season as string) + 1}
+            </h1>
           </div>
         </div>
       )}
+      <div className="parentContainer">
       {standings && (
         <div className="logoContainer">
           {statKeeper && (
             <>
-            <a className="logo_link" href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;">
-              <img className="logo" src={standings[0].team.logo}></img>
+              <a
+                className="logo_link"
+                href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;"
+              >
+                <img className="logo" src={standings[0].team.logo}></img>
               </a>
-              
+
               <div className="outerStatContainer">
                 <div className="statContainer">
                   <h3>Games Yet To Play</h3>
@@ -108,64 +112,64 @@ function App() {
                 </div>
                 {nextFixtures && (
                   <div className="statContainer">
-                     <h3>Decisive Game</h3>
-                  <div className="dg_fixtureContainer">
-                    <div className="dg_date">
-                      <h1>
-                        {new Date(
-                          nextFixtures.response[
-                            statKeeper.numberOfWins +
-                              statKeeper.numberOfDraws -
-                              1
-                          ].fixture.date
-                        ).toLocaleDateString()}
-                      </h1>
-                    </div>
-                    <div className="dg_fixture">
-                      <div className="dg_home">
-                        <img
-                          className="dg_home:logo"
-                          src={
-                            nextFixtures.response[
-                              statKeeper.numberOfWins +
-                                statKeeper.numberOfDraws -
-                                1
-                            ].teams.home.logo
-                          }
-                        />
+                    <h3>Decisive Game</h3>
+                    <div className="dg_fixtureContainer">
+                      <div className="dg_date">
                         <h1>
-                          {new String(
+                          {new Date(
                             nextFixtures.response[
                               statKeeper.numberOfWins +
                                 statKeeper.numberOfDraws -
                                 1
-                            ].teams.home.name
-                          ).slice(0, 3)}
+                            ].fixture.date
+                          ).toLocaleDateString()}
                         </h1>
                       </div>
-                      <div className="dg_away">
-                        <h1>
-                          {new String(
-                            nextFixtures.response[
-                              statKeeper.numberOfWins +
-                                statKeeper.numberOfDraws -
-                                1
-                            ].teams.away.name
-                          ).slice(0, 3)}
-                        </h1>
-                        <img
-                          className="dg_away_logo"
-                          src={
-                            nextFixtures.response[
-                              statKeeper.numberOfWins +
-                                statKeeper.numberOfDraws -
-                                1
-                            ].teams.away.logo
-                          }
-                        />
+                      <div className="dg_fixture">
+                        <div className="dg_home">
+                          <img
+                            className="dg_home:logo"
+                            src={
+                              nextFixtures.response[
+                                statKeeper.numberOfWins +
+                                  statKeeper.numberOfDraws -
+                                  1
+                              ].teams.home.logo
+                            }
+                          />
+                          <h1>
+                            {new String(
+                              nextFixtures.response[
+                                statKeeper.numberOfWins +
+                                  statKeeper.numberOfDraws -
+                                  1
+                              ].teams.home.name
+                            ).slice(0, 3)}
+                          </h1>
+                        </div>
+                        <div className="dg_away">
+                          <h1>
+                            {new String(
+                              nextFixtures.response[
+                                statKeeper.numberOfWins +
+                                  statKeeper.numberOfDraws -
+                                  1
+                              ].teams.away.name
+                            ).slice(0, 3)}
+                          </h1>
+                          <img
+                            className="dg_away_logo"
+                            src={
+                              nextFixtures.response[
+                                statKeeper.numberOfWins +
+                                  statKeeper.numberOfDraws -
+                                  1
+                              ].teams.away.logo
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
                   </div>
                 )}
               </div>
@@ -182,18 +186,19 @@ function App() {
           <div className="container">
             <div className="innerContainer">
               <div className="headerContainer">
-                <div className="headerElement">Rank</div>
+                <div className="headerElement">Pos.</div>
                 <div className="headerElement"></div>
-                <div className="headerElement_name">Name</div>
-                <div className="headerElement">Played</div>
-                <div className="headerElement">Won</div>
-                <div className="headerElement">Drawn</div>
-                <div className="headerElement">Lost</div>
-                <div className="headerElement">Goals +</div>
-                <div className="headerElement">Goals -</div>
-                <div className="headerElement">Goal +/-</div>
-                <div className="headerElement">Points</div>
+                <div className="headerElement_name">N</div>
+                <div className="headerElement">P</div>
+                <div className="headerElement">W</div>
+                <div className="headerElement">D</div>
+                <div className="headerElement">L</div>
+                <div className="headerElement">G+</div>
+                <div className="headerElement">G-</div>
+                <div className="headerElement">G+/-</div>
+                <div className="headerElement">Pts.</div>
               </div>
+              
               <div
                 style={{
                   display: "flex",
@@ -212,18 +217,20 @@ function App() {
               >
                 <TablePositionView teamPosition={standings[1]} />
               </div>
-              <button
-                className="showStandings_btn"
-                onClick={(e) => toggleShowCompleteStandings(e)}
-              >
-                Show complete standings...
-              </button>
               {showCompleteStandings && (
                 <>
                   {standings.map((standing: any) => (
                     <div key={standing.rank}>
                       {standing.rank >= 3 ? (
-                        <TablePositionView teamPosition={standing} />
+                         <div
+                         style={{
+                           display: "flex",
+                           alignItems: "center",
+                           justifyContent: "center",
+                         }}
+                       >
+                         <TablePositionView teamPosition={standing} />
+                       </div>
                       ) : (
                         " "
                       )}
@@ -231,10 +238,18 @@ function App() {
                   ))}
                 </>
               )}
+             <button
+        className="showStandings_btn"
+        onClick={(e) => toggleShowCompleteStandings(e)}
+      >
+        Show complete standings...
+      </button>
             </div>
           </div>
         </>
       )}
+
+      </div>
       <Footer />
     </div>
   );
