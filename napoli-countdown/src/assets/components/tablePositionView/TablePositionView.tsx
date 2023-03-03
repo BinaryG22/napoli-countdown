@@ -1,10 +1,8 @@
-import "./TablePositionViewStyle.css"
-
 function TablePositionView(props: any) {
 
     return (
         <>
-        <div className="tablePosition">
+        <div className="row d-flex justify-content-center mt-1">
         <TableCell content={props.teamPosition.rank} />
             <TableCellImage imgHeightAndWidth="30px" content={props.teamPosition.team.logo} />
             <TableCell name={true} content={props.teamPosition.team.name} />
@@ -33,8 +31,8 @@ function TableCell(prop: props) {
 
     return (
         <>
-        <div className={prop.last ? "lastTableCell" : prop.name ? "tableCell_name" : "tableCell"}>
-            <p>{prop.content}</p>
+        <div className={prop.last ? "col-1 d-flex align-items-center justify-content-center bg-black bg-opacity-50" : prop.name ? "col-2 d-flex align-items-center justify-content-start" :  "col-1 d-flex align-items-center justify-content-center"}>
+            <span>{prop.content}</span>
         </div>
         </>
     )
@@ -44,7 +42,7 @@ function TableCellImage(prop: props) {
 
     return (
         <>
-        <div className="tableCell">
+        <div className="col-1 d-flex align-items-center justify-content-center">
         <img width={prop.imgHeightAndWidth} height={prop.imgHeightAndWidth} src={prop.content?.toString()} />
         </div>
         </>

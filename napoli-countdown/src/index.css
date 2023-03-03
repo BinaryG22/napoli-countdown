@@ -1,7 +1,25 @@
 body {
-    font-size: medium;
-    font-family: 'Dosis', sans-serif;
-    font-weight: 400;
-    background-color: rgb(18, 0, 26);
-    color: whitesmoke;
+    font-size: medium !important;
+    font-family: 'Dosis', sans-serif !important;
+    font-weight: 400 !important;
+    background-color: rgb(61, 0, 87) !important;
+    color: whitesmoke !important;
+    font-size: medium !important;
+}
+
+/**
+test
+*/
+div {
+    border: 0px solid lightslategrey !important;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
 }

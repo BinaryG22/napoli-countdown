@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import TablePositionView from "./assets/components/tablePositionView/TablePositionView";
-import "./App.css";
-import Footer from "./assets/components/tablePositionView/footer/Footer";
+import Footer from "./assets/components/footer/Footer";
+import * as allSeasonTest from "./test/allSeasonData.json";
+import * as fixtureData from "./test/fixtureData.json";
+import "./index.css";
 
 interface statKeeper {
   gamesInTotal: number;
-  napoli_playedGames: number;
-  napoli_gamesLeft: number;
+  firstTeam_playedGames: number;
+  firstTeam_gamesLeft: number;
   diffPoints: number;
   maxPointsForSec: number;
   pointsToReachTotal: number;
@@ -15,6 +17,7 @@ interface statKeeper {
   numberOfDraws: number;
 }
 
+// todo: need to add logic for remaining second teams games to play
 function App() {
   const [allSeasonData, setAllSeasonData] = useState<any>();
   const [standings, setStandings] = useState<any>();
@@ -24,9 +27,16 @@ function App() {
   const [nextFixtures, setNextFixtures] = useState<any>();
 
   useEffect(() => {
-    fetchCurrentSerieAStandings();
+    //fetchCurrentSerieAStandings();
 
-    fetchNextFixturesToCome();
+    //fetchNextFixturesToCome();
+
+    /**
+     * for test purposes
+     */
+
+    setAllSeasonData(allSeasonTest);
+    setNextFixtures(fixtureData);
   }, []);
 
   useEffect(() => {
@@ -39,8 +49,8 @@ function App() {
     if (standings !== undefined) {
       let _statKeeperObj: statKeeper = {
         gamesInTotal: standings.length * 2 - 2,
-        napoli_playedGames: standings[0].all.played,
-        napoli_gamesLeft: standings.length * 2 - 2 - standings[0].all.played,
+        firstTeam_playedGames: standings[0].all.played,
+        firstTeam_gamesLeft: standings.length * 2 - 2 - standings[0].all.played,
         diffPoints: standings[0].points - standings[1].points,
         maxPointsForSec:
           standings[1].points +
@@ -74,10 +84,11 @@ function App() {
   }, [standings]);
 
   return (
-    <div>
+    <>
+    <div className="container-fluid mt-5">
       {allSeasonData && (
-        <div className="header">
-          <div className="title">
+        <div className="row text-center">
+          <div className="col-12">
             <h1>
               ROAD TO SCUDETTO {allSeasonData.response[0].league.season}/
               {parseInt(allSeasonData.response[0].league.season as string) + 1}
@@ -85,135 +96,169 @@ function App() {
           </div>
         </div>
       )}
-      <div className="parentContainer">
-      {standings && (
-        <div className="logoContainer">
-          {statKeeper && (
-            <>
-              <a
-                className="logo_link"
-                href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;"
-              >
-                <img className="logo" src={standings[0].team.logo}></img>
-              </a>
+      <div className="container-fluid mt-5">
+        {standings && (
+          <div className="row">
+            {statKeeper && (
+              <>
+                <div className="col-4 d-flex align-items-center justify-content-center">
+                  <a
+                    className="logo_link"
+                    href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;"
+                  >
+                    <img className="logo" src={standings[0].team.logo}></img>
+                  </a>
+                </div>
 
-              <div className="outerStatContainer">
-                <div className="statContainer">
-                  <h3>Games Yet To Play</h3>
-                  <h1>{statKeeper.napoli_gamesLeft}</h1>
-                </div>
-                <div className="statContainer">
-                  <h3>Wins Left</h3>
-                  <h1>{statKeeper.numberOfWins}</h1>
-                </div>
-                <div className="statContainer">
-                  <h3>Draws Left</h3>
-                  <h1>{statKeeper.numberOfDraws}</h1>
-                </div>
-                {nextFixtures && (
-                  <div className="statContainer">
-                    <h3>Decisive Game</h3>
-                    <div className="dg_fixtureContainer">
-                      <div className="dg_date">
-                        <h1>
-                          {new Date(
-                            nextFixtures.response[
-                              statKeeper.numberOfWins +
-                                statKeeper.numberOfDraws -
-                                1
-                            ].fixture.date
-                          ).toLocaleDateString()}
-                        </h1>
+                <div className="col-8 ">
+                  <div className="row">
+                    <div className="col-6">
+                      <span>Games Yet To Play</span>
+                    </div>
+                    <div className="col-6 d-flex align-items-center justify-content-end">
+                      <span>{statKeeper.firstTeam_gamesLeft}</span>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-6  d-flex align-items-center">
+                      <span>Wins Left</span>
+                    </div>
+                    <div className="col-6  d-flex align-items-center justify-content-end">
+                      <span>{statKeeper.numberOfWins}</span>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-6  d-flex align-items-center">
+                      <span>Draws Left</span>
+                    </div>
+                    <div className="col-6  d-flex align-items-center justify-content-end">
+                      <span>{statKeeper.numberOfDraws}</span>
+                    </div>
+                  </div>
+                  {nextFixtures && (
+                    <div className="row">
+                      <div className="col-6 d-flex align-items-center">
+                        <span>Decisive Game</span>
                       </div>
-                      <div className="dg_fixture">
-                        <div className="dg_home">
-                          <img
-                            className="dg_home:logo"
-                            src={
-                              nextFixtures.response[
-                                statKeeper.numberOfWins +
-                                  statKeeper.numberOfDraws -
-                                  1
-                              ].teams.home.logo
-                            }
-                          />
-                          <h1>
-                            {new String(
-                              nextFixtures.response[
-                                statKeeper.numberOfWins +
-                                  statKeeper.numberOfDraws -
-                                  1
-                              ].teams.home.name
-                            ).slice(0, 3)}
-                          </h1>
-                        </div>
-                        <div className="dg_away">
-                          <h1>
-                            {new String(
-                              nextFixtures.response[
-                                statKeeper.numberOfWins +
-                                  statKeeper.numberOfDraws -
-                                  1
-                              ].teams.away.name
-                            ).slice(0, 3)}
-                          </h1>
-                          <img
-                            className="dg_away_logo"
-                            src={
-                              nextFixtures.response[
-                                statKeeper.numberOfWins +
-                                  statKeeper.numberOfDraws -
-                                  1
-                              ].teams.away.logo
-                            }
-                          />
+                      <div className="col-6">
+                        <div className="row">
+                          <div className="col-12 text-end">
+                            <span>
+                              {new Date(
+                                nextFixtures.response[
+                                  statKeeper.numberOfWins +
+                                    statKeeper.numberOfDraws -
+                                    1
+                                ].fixture.date
+                              ).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <div className="col-12">
+                            <div className="row d-flex align-items-center justify-content-end">
+                              <div className="col-3 d-flex align-items-center justify-content-center">
+                                <img
+                                  className="dg_home:logo"
+                                  src={
+                                    nextFixtures.response[
+                                      statKeeper.numberOfWins +
+                                        statKeeper.numberOfDraws -
+                                        1
+                                    ].teams.home.logo
+                                  }
+                                />
+                              </div>
+                              <div className="col-3 d-flex align-items-center justify-content-center">
+                                <span>
+                                  {new String(
+                                    nextFixtures.response[
+                                      statKeeper.numberOfWins +
+                                        statKeeper.numberOfDraws -
+                                        1
+                                    ].teams.home.name
+                                  ).slice(0, 3)}
+                                </span>
+                              </div>
+
+                              <div className="col-3 d-flex align-items-center justify-content-center">
+                                <span>
+                                  {new String(
+                                    nextFixtures.response[
+                                      statKeeper.numberOfWins +
+                                        statKeeper.numberOfDraws -
+                                        1
+                                    ].teams.away.name
+                                  ).slice(0, 3)}
+                                </span>
+                              </div>
+                              <div className="col-3 d-flex align-items-center justify-content-center">
+                                <img
+                                  className="dg_away_logo"
+                                  src={
+                                    nextFixtures.response[
+                                      statKeeper.numberOfWins +
+                                        statKeeper.numberOfDraws -
+                                        1
+                                    ].teams.away.logo
+                                  }
+                                />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-      )}
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        )}
 
-      {
-        // display here the first and second place
-      }
-      {standings && (
-        <>
-          <div className="container">
-            <div className="innerContainer">
-              <div className="headerContainer">
-                <div className="headerElement">Pos.</div>
-                <div className="headerElement"></div>
-                <div className="headerElement_name">N</div>
-                <div className="headerElement">P</div>
-                <div className="headerElement">W</div>
-                <div className="headerElement">D</div>
-                <div className="headerElement">L</div>
-                <div className="headerElement">G+</div>
-                <div className="headerElement">G-</div>
-                <div className="headerElement">G+/-</div>
-                <div className="headerElement">Pts.</div>
-              </div>
-              
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+        {
+          // display here the first and second place
+        }
+        {standings && (
+          <>
+            <div className="container-fluid mt-3 small">
+              <div className="row d-flex justify-content-center small">
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  Pos.
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center"></div>
+                <div className="col-2 d-flex align-items-center justify-content-center">
+                  N
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  P
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  W
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  D
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  L
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  G+
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  G-
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center">
+                  G+/-
+                </div>
+                <div className="col-1 d-flex align-items-center justify-content-center bg-black">
+                  Pts.
+                </div>
+           
+
+              <div>
                 <TablePositionView teamPosition={standings[0]} />
               </div>
               <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+               
               >
                 <TablePositionView teamPosition={standings[1]} />
               </div>
@@ -222,15 +267,10 @@ function App() {
                   {standings.map((standing: any) => (
                     <div key={standing.rank}>
                       {standing.rank >= 3 ? (
-                         <div
-                         style={{
-                           display: "flex",
-                           alignItems: "center",
-                           justifyContent: "center",
-                         }}
-                       >
-                         <TablePositionView teamPosition={standing} />
-                       </div>
+                        <div
+                        >
+                          <TablePositionView teamPosition={standing} />
+                        </div>
                       ) : (
                         " "
                       )}
@@ -238,20 +278,23 @@ function App() {
                   ))}
                 </>
               )}
-             <button
-        className="showStandings_btn"
-        onClick={(e) => toggleShowCompleteStandings(e)}
-      >
-        Show complete standings...
-      </button>
             </div>
-          </div>
-        </>
-      )}
-
+            </div>
+          </>
+        )}
+           <div className="col-6 text-start mt-2">
+              <button
+                type="button" className="btn btn-outline-ghost btn-sm"
+                onClick={(e) => toggleShowCompleteStandings(e)}
+              >
+                Show complete standings...
+              </button>
+              </div>
       </div>
-      <Footer />
     </div>
+       <Footer />
+       
+       </>
   );
 
   function toggleShowCompleteStandings(
@@ -281,6 +324,7 @@ function App() {
     )
       .then((response) => response.json())
       .then((response) => {
+        console.log(response);
         setAllSeasonData(response);
       })
       .catch((err) => console.error(err));
