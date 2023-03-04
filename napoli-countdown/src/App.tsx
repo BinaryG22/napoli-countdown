@@ -85,216 +85,238 @@ function App() {
 
   return (
     <>
-    <div className="container-fluid mt-5">
-      {allSeasonData && (
-        <div className="row text-center">
-          <div className="col-12">
-            <h1>
-              ROAD TO SCUDETTO {allSeasonData.response[0].league.season}/
-              {parseInt(allSeasonData.response[0].league.season as string) + 1}
-            </h1>
+      <div
+        className="container mt-5 parentContainer"
+        style={{ maxWidth: "90vw" }}
+      >
+        {allSeasonData && (
+          <div className="row text-center titleContainer">
+            <div className="col-12">
+              <strong>
+                ROAD TO SCUDETTO {allSeasonData.response[0].league.season}/
+                {parseInt(allSeasonData.response[0].league.season as string) +
+                  1}
+              </strong>
+            </div>
           </div>
-        </div>
-      )}
-      <div className="container-fluid mt-5">
-        {standings && (
-          <div className="row">
-            {statKeeper && (
-              <>
-                <div className="col-4 d-flex align-items-center justify-content-center">
-                  <a
-                    className="logo_link"
-                    href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;"
-                  >
-                    <img className="logo" src={standings[0].team.logo}></img>
-                  </a>
-                </div>
+        )}
+        <div className="container-fluid mt-5 statContainer">
+          {standings && (
+            <div className="row">
+              {statKeeper && (
+                <>
+                  <div className="col-4 d-flex align-items-center justify-content-center">
+                    <a
+                      className="logo_link"
+                      href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;"
+                    >
+                      <img className="logo" src={standings[0].team.logo}></img>
+                    </a>
+                  </div>
 
-                <div className="col-8 ">
-                  <div className="row">
-                    <div className="col-6">
-                      <span>Games Yet To Play</span>
-                    </div>
-                    <div className="col-6 d-flex align-items-center justify-content-end">
-                      <span>{statKeeper.firstTeam_gamesLeft}</span>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-6  d-flex align-items-center">
-                      <span>Wins Left</span>
-                    </div>
-                    <div className="col-6  d-flex align-items-center justify-content-end">
-                      <span>{statKeeper.numberOfWins}</span>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-6  d-flex align-items-center">
-                      <span>Draws Left</span>
-                    </div>
-                    <div className="col-6  d-flex align-items-center justify-content-end">
-                      <span>{statKeeper.numberOfDraws}</span>
-                    </div>
-                  </div>
-                  {nextFixtures && (
-                    <div className="row">
-                      <div className="col-6 d-flex align-items-center">
-                        <span>Decisive Game</span>
-                      </div>
+                  <div className="col-8 ">
+                    <div
+                      className="row mb-2 d-flex justify-content-center align-items-center  pb-2"
+                      style={{ minHeight: "6vw" }}
+                    >
                       <div className="col-6">
-                        <div className="row">
-                          <div className="col-12 text-end">
-                            <span>
-                              {new Date(
-                                nextFixtures.response[
-                                  statKeeper.numberOfWins +
-                                    statKeeper.numberOfDraws -
-                                    1
-                                ].fixture.date
-                              ).toLocaleDateString()}
-                            </span>
-                          </div>
-                          <div className="col-12">
-                            <div className="row d-flex align-items-center justify-content-end">
-                              <div className="col-3 d-flex align-items-center justify-content-center">
-                                <img
-                                  className="dg_home:logo"
-                                  src={
-                                    nextFixtures.response[
-                                      statKeeper.numberOfWins +
-                                        statKeeper.numberOfDraws -
-                                        1
-                                    ].teams.home.logo
-                                  }
-                                />
-                              </div>
-                              <div className="col-3 d-flex align-items-center justify-content-center">
-                                <span>
-                                  {new String(
-                                    nextFixtures.response[
-                                      statKeeper.numberOfWins +
-                                        statKeeper.numberOfDraws -
-                                        1
-                                    ].teams.home.name
-                                  ).slice(0, 3)}
-                                </span>
-                              </div>
+                        <strong>Games Yet To Play</strong>
+                      </div>
+                      <div className="col-6 d-flex align-items-center justify-content-end">
+                        <strong>{statKeeper.firstTeam_gamesLeft}</strong>
+                      </div>
+                    </div>
+                    <div
+                      className="row mb-2 d-flex justify-content-center align-items-center  pb-2"
+                      style={{ minHeight: "6vw" }}
+                    >
+                      <div className="col-6  d-flex align-items-center">
+                        <strong>Wins Left</strong>
+                      </div>
+                      <div className="col-6  d-flex align-items-center justify-content-end">
+                        <strong>{statKeeper.numberOfWins}</strong>
+                      </div>
+                    </div>
+                    <div
+                      className="row mb-2 d-flex justify-content-center align-items-center  pb-2"
+                      style={{ minHeight: "6vw" }}
+                    >
+                      <div className="col-6  d-flex align-items-center">
+                        <strong>Draws Left</strong>
+                      </div>
+                      <div className="col-6  d-flex align-items-center justify-content-end">
+                        <strong>{statKeeper.numberOfDraws}</strong>
+                      </div>
+                    </div>
+                    {nextFixtures && (
+                      <div
+                        className="row mb-2 d-flex justify-content-center align-items-center  pb-2"
+                        style={{ minHeight: "6vw" }}
+                      >
+                        <div className="col-6 d-flex align-items-center">
+                          <strong>Decisive Game</strong>
+                        </div>
+                        <div className="col-6">
+                          <div className="row">
+                            <div className="col-12 text-end">
+                              <small>
+                                <strong>
+                                {new Date(
+                                  nextFixtures.response[
+                                    statKeeper.numberOfWins +
+                                      statKeeper.numberOfDraws -
+                                      1
+                                  ].fixture.date
+                                ).toLocaleDateString()}
+                                </strong>
+                              </small>
+                            </div>
+                            <div className="col-12">
+                              <div className="mt-2 mt-0 row d-flex align-items-center justify-content-end">
+                                <div className="col-3 pe-0 d-flex align-items-center justify-content-center">
+                                  <img
+                                    className="dg_home:logo"
+                                    src={
+                                      nextFixtures.response[
+                                        statKeeper.numberOfWins +
+                                          statKeeper.numberOfDraws -
+                                          1
+                                      ].teams.home.logo
+                                    }
+                                  />
+                                </div>
+                                <div className="col-3 d-flex align-items-center justify-content-center">
+                                  <strong>
+                                    {new String(
+                                      nextFixtures.response[
+                                        statKeeper.numberOfWins +
+                                          statKeeper.numberOfDraws -
+                                          1
+                                      ].teams.home.name
+                                    ).slice(0, 3)}
+                                  </strong>
+                                </div>
 
-                              <div className="col-3 d-flex align-items-center justify-content-center">
-                                <span>
-                                  {new String(
-                                    nextFixtures.response[
-                                      statKeeper.numberOfWins +
-                                        statKeeper.numberOfDraws -
-                                        1
-                                    ].teams.away.name
-                                  ).slice(0, 3)}
-                                </span>
-                              </div>
-                              <div className="col-3 d-flex align-items-center justify-content-center">
-                                <img
-                                  className="dg_away_logo"
-                                  src={
-                                    nextFixtures.response[
-                                      statKeeper.numberOfWins +
-                                        statKeeper.numberOfDraws -
-                                        1
-                                    ].teams.away.logo
-                                  }
-                                />
+                                <div className="col-3 d-flex align-items-center justify-content-center">
+                                  <strong>
+                                    {new String(
+                                      nextFixtures.response[
+                                        statKeeper.numberOfWins +
+                                          statKeeper.numberOfDraws -
+                                          1
+                                      ].teams.away.name
+                                    ).slice(0, 3)}
+                                  </strong>
+                                </div>
+                                <div className="col-3 ps-0  d-flex align-items-center justify-content-center">
+                                  <img
+                                    className="dg_away_logo"
+                                    src={
+                                      nextFixtures.response[
+                                        statKeeper.numberOfWins +
+                                          statKeeper.numberOfDraws -
+                                          1
+                                      ].teams.away.logo
+                                    }
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        )}
-
-        {
-          // display here the first and second place
-        }
-        {standings && (
-          <>
-            <div className="container-fluid mt-3 small">
-              <div className="row d-flex justify-content-center small">
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  Pos.
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center"></div>
-                <div className="col-2 d-flex align-items-center justify-content-center">
-                  N
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  P
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  W
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  D
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  L
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  G+
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  G-
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  G+/-
-                </div>
-                <div className="col-1 d-flex align-items-center justify-content-center bg-black">
-                  Pts.
-                </div>
-           
-
-              <div>
-                <TablePositionView teamPosition={standings[0]} />
-              </div>
-              <div
-               
-              >
-                <TablePositionView teamPosition={standings[1]} />
-              </div>
-              {showCompleteStandings && (
-                <>
-                  {standings.map((standing: any) => (
-                    <div key={standing.rank}>
-                      {standing.rank >= 3 ? (
-                        <div
-                        >
-                          <TablePositionView teamPosition={standing} />
-                        </div>
-                      ) : (
-                        " "
-                      )}
-                    </div>
-                  ))}
+                    )}
+                  </div>
                 </>
               )}
             </div>
-            </div>
-          </>
-        )}
-           <div className="col-6 text-start mt-2">
-              <button
-                type="button" className="btn btn-outline-ghost btn-sm"
-                onClick={(e) => toggleShowCompleteStandings(e)}
-              >
-                Show complete standings...
-              </button>
+          )}
+
+          {
+            // display here the first and second place
+          }
+          {standings && (
+            <>
+              <div className="container-fluid mt-5 standingsContainer">
+                <div className="row d-flex justify-content-center ">
+                  <div className="standingsHeader border-bottom border-secondary row d-flex justify-content-center  mb-1 p-0 pb-1 ">
+                    <div
+                      className="col-1 d-flex align-items-center justify-content-center"
+                      style={{ minHeight: "3vw" }}
+                    >
+                      Pos.
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center"></div>
+                    <div className="col-2 d-flex align-items-center justify-content-center">
+                      N
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      P
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      W
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      D
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      L
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      G+
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      G-
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      G+/-
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      Pts.
+                    </div>
+                  </div>
+
+                  <div>
+                    <TablePositionView teamPosition={standings[0]} />
+                  </div>
+                  <div>
+                    <TablePositionView teamPosition={standings[1]} />
+                  </div>
+                  {showCompleteStandings && (
+                    <>
+                      {standings.map((standing: any) => (
+                        <div key={standing.rank}>
+                          {standing.rank >= 3 ? (
+                            <div>
+                              <TablePositionView teamPosition={standing} />
+                            </div>
+                          ) : (
+                            " "
+                          )}
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
               </div>
+            </>
+          )}
+          <div className="col-6 text-start mt-2 mb-2 ">
+            <button
+              type="button"
+              className="btn btn-outline-ghost btn-sm"
+              onClick={(e) => toggleShowCompleteStandings(e)}
+            >
+              <span style={{ fontSize: "2vw" }}>
+                {" "}
+                Show complete standings...
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-       <Footer />
-       
-       </>
+      <Footer />
+    </>
   );
 
   function toggleShowCompleteStandings(

@@ -4,8 +4,8 @@ const EMAIL = "palumbo.antonio@gmx.de";
 function Footer() {
   return (
     <div
-      className=" container-fluid flex-shrink-0 py-4 bg-dark text-white-50"
-      style={{ minHeight: "2.5rem"}}
+      className=" container-fluid flex-shrink-0 py-4 bg-dark text-white-50 footer"
+      style={{ minHeight: "1rem", marginTop:"5vw"}}
     >
 
       <div className="row">
@@ -19,6 +19,9 @@ function Footer() {
           <span>{EMAIL}</span>
         </div>
       </div>
+
+
+
 
     </div>
   );

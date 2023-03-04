@@ -1,25 +1,113 @@
 body {
-    font-size: medium !important;
-    font-family: 'Dosis', sans-serif !important;
-    font-weight: 400 !important;
-    background-color: rgb(61, 0, 87) !important;
-    color: whitesmoke !important;
-    font-size: medium !important;
+  font-size: medium !important;
+  font-family: "Dosis", sans-serif !important;
+  font-weight: 400 !important;
+  background-color: #12001a !important;
+  color: whitesmoke !important;
+  font-size: medium !important;
 }
 
 /**
 test
 */
 div {
-    border: 0px solid lightslategrey !important;
+  border: 0px solid lightslategrey !important;
 }
 
-img {
-    width: 20px;
-    height: 20px;
+
+.statContainer {
+    font-variant: small-caps;
 }
 
-.logo {
-    width: 100%;
-    height: auto;
+.standingsContainer {
+    font-variant: normal;
 }
+
+
+@media screen and (max-width: 720px) {
+    .parentContainer {
+        max-width: 100%;
+      }
+    img {
+        width: 100%;
+        height: auto;
+        min-width: 4vw;
+      }
+      
+      .logo {
+          width: 100%;
+          height: auto;
+      }
+      
+      .statContainer {
+        font-size: 4vw;
+      }
+      
+      .titleContainer {
+        font-size: 5vw;
+      }
+      
+      .standingsContainer {
+        font-size: 3vw;
+      }
+
+      .tableCell{
+        min-height: 8vw;
+        background-color: #fff2;
+      }
+
+      
+      .footer {
+        font-size: 2vw;
+      }
+
+      .standingsHeader {
+        font-size: 2vw;
+        color: gray;
+      }
+  }
+
+@media screen and (min-width: 720px) {
+    .parentContainer {
+      max-width: 65% !important;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        max-width: 2vw;
+      }
+      
+      .logo {
+          width: 100%;
+          height: auto;
+          min-width: 12vw;
+      }
+      
+      .statContainer {
+        font-size: 2vw;
+      }
+      
+      .titleContainer {
+        font-size: 3vw;
+      }
+      
+      .standingsContainer {
+        font-size: 1.5vw;
+      }
+
+      .tableCell{
+        min-height: 3vw;
+        background-color: #fff2;
+      }
+
+      .footer {
+        font-size: 1vw;
+      }
+
+      .standingsHeader {
+        font-size: 1vw;
+        color: gray;
+      }
+      
+  }
