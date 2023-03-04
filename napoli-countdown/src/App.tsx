@@ -4,6 +4,8 @@ import Footer from "./assets/components/footer/Footer";
 import * as allSeasonTest from "./test/allSeasonData.json";
 import * as fixtureData from "./test/fixtureData.json";
 import "./index.css";
+import MediaQuery from "react-responsive";
+import TableMobileView from "./assets/components/mobile/tableMobileView/tableMobileView";
 
 interface statKeeper {
   gamesInTotal: number;
@@ -161,13 +163,13 @@ function App() {
                             <div className="col-12 text-end">
                               <small>
                                 <strong>
-                                {new Date(
-                                  nextFixtures.response[
-                                    statKeeper.numberOfWins +
-                                      statKeeper.numberOfDraws -
-                                      1
-                                  ].fixture.date
-                                ).toLocaleDateString()}
+                                  {new Date(
+                                    nextFixtures.response[
+                                      statKeeper.numberOfWins +
+                                        statKeeper.numberOfDraws -
+                                        1
+                                    ].fixture.date
+                                  ).toLocaleDateString()}
                                 </strong>
                               </small>
                             </div>
@@ -235,52 +237,102 @@ function App() {
           {
             // display here the first and second place
           }
-          {standings && (
-            <>
-              <div className="container-fluid mt-5 standingsContainer">
-                <div className="row d-flex justify-content-center ">
-                  <div className="standingsHeader border-bottom border-secondary row d-flex justify-content-center  mb-1 p-0 pb-1 ">
-                    <div
-                      className="col-1 d-flex align-items-center justify-content-center"
-                      style={{ minHeight: "3vw" }}
-                    >
-                      Pos.
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center"></div>
-                    <div className="col-2 d-flex align-items-center justify-content-center">
-                      N
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      P
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      W
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      D
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      L
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      G+
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      G-
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      G+/-
-                    </div>
-                    <div className="col-1 d-flex align-items-center justify-content-center">
-                      Pts.
-                    </div>
-                  </div>
 
-                  <div>
-                    <TablePositionView teamPosition={standings[0]} />
+          <MediaQuery minWidth={720}>
+            {standings && (
+              <>
+                <div className="container-fluid mt-5 standingsContainer">
+                  <div className="row d-flex justify-content-center ">
+                    <div className="standingsHeader border-bottom border-secondary row d-flex justify-content-center  mb-1 p-0 pb-1 ">
+                      <div
+                        className="col-1 d-flex align-items-center justify-content-center"
+                        style={{ minHeight: "3vw" }}
+                      >
+                        Pos.
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center"></div>
+                      <div className="col-2 d-flex align-items-center justify-content-center">
+                        N
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        P
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        W
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        D
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        L
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        G+
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        G-
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        G+/-
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        Pts.
+                      </div>
+                    </div>
+
+                    <div>
+                      <TablePositionView teamPosition={standings[0]} />
+                    </div>
+                    <div>
+                      <TablePositionView teamPosition={standings[1]} />
+                    </div>
+                    {showCompleteStandings && (
+                      <>
+                        {standings.map((standing: any) => (
+                          <div key={standing.rank}>
+                            {standing.rank >= 3 ? (
+                              <div>
+                                <TablePositionView teamPosition={standing} />
+                              </div>
+                            ) : (
+                              " "
+                            )}
+                          </div>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+          </MediaQuery>
+          <MediaQuery maxWidth={720}>
+            {standings && (
+              <>
+                <div className="container-fluid mt-5">
+                  <div className="row d-flex justify-content-center ">
+                    <div className="standingsHeader border-bottom border-secondary row d-flex justify-content-center  mb-1 p-0 pb-1 ">
+                      <div
+                        className="col-2 d-flex align-items-center justify-content-center"
+                        style={{ minHeight: "3vw" }}
+                      >
+                        Pos.
+                      </div>
+                      <div className="col-2 d-flex align-items-center justify-content-center"></div>
+                      <div className="col-4 d-flex align-items-center justify-content-center">
+                        N
+                      </div>
+                      <div className="col-2 d-flex align-items-center justify-content-center">
+                        Pts.
+                      </div>
+                      <div className="col-2 d-flex align-items-center justify-content-center"></div>
+                    </div>
                   </div>
                   <div>
-                    <TablePositionView teamPosition={standings[1]} />
+                    <TableMobileView teamPosition={standings[0]} />
+                  </div>
+                  <div>
+                    <TableMobileView teamPosition={standings[1]} />
                   </div>
                   {showCompleteStandings && (
                     <>
@@ -288,7 +340,7 @@ function App() {
                         <div key={standing.rank}>
                           {standing.rank >= 3 ? (
                             <div>
-                              <TablePositionView teamPosition={standing} />
+                              <TableMobileView teamPosition={standing} />
                             </div>
                           ) : (
                             " "
@@ -298,17 +350,16 @@ function App() {
                     </>
                   )}
                 </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </MediaQuery>
           <div className="col-6 text-start mt-2 mb-2 ">
             <button
               type="button"
               className="btn btn-outline-ghost btn-sm"
               onClick={(e) => toggleShowCompleteStandings(e)}
             >
-              <span style={{ fontSize: "2vw" }}>
-                {" "}
+              <span style={{ fontSize: "1vw" }}>
                 Show complete standings...
               </span>
             </button>
