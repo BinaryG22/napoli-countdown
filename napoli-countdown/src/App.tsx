@@ -30,16 +30,16 @@ function App() {
   const [nextFixtures, setNextFixtures] = useState<any>();
 
   useEffect(() => {
-    //fetchCurrentSerieAStandings();
+    fetchCurrentSerieAStandings();
 
-    //fetchNextFixturesToCome();
+    fetchNextFixturesToCome();
 
     /**
      * for test purposes
      */
 
-    setAllSeasonData(allSeasonTest);
-    setNextFixtures(fixtureData);
+    //setAllSeasonData(allSeasonTest);
+    //setNextFixtures(fixtureData);
   }, []);
 
   useEffect(() => {
