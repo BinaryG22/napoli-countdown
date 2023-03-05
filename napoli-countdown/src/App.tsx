@@ -5,7 +5,8 @@ import * as allSeasonTest from "./test/allSeasonData.json";
 import * as fixtureData from "./test/fixtureData.json";
 import "./index.css";
 import MediaQuery from "react-responsive";
-import TableMobileView from "./assets/components/mobile/tableMobileView/tableMobileView";
+import TableMobileView from "./assets/components/mobile/tableMobileView/TableMobileView";
+
 
 interface statKeeper {
   gamesInTotal: number;
@@ -107,7 +108,7 @@ function App() {
             <div className="row">
               {statKeeper && (
                 <>
-                  <div className="col-4 d-flex align-items-center justify-content-center">
+                  <div className="col-4 d-flex align-items-center justify-content-start">
                     <a
                       className="logo_link"
                       href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;"
@@ -174,9 +175,12 @@ function App() {
                               </small>
                             </div>
                             <div className="col-12">
-                              <div className="mt-2 mt-0 row d-flex align-items-center justify-content-end">
-                                <div className="col-3 pe-0 d-flex align-items-center justify-content-center">
+
+                              <div className="mt-0 row d-flex align-items-center justify-content-end">
+
+                                <div className=" col-5 pe-0 d-flex align-items-center justify-content-end">
                                   <img
+                                     style={{marginRight:"5px"}}
                                     className="dg_home:logo"
                                     src={
                                       nextFixtures.response[
@@ -186,8 +190,8 @@ function App() {
                                       ].teams.home.logo
                                     }
                                   />
-                                </div>
-                                <div className="col-3 d-flex align-items-center justify-content-center">
+                               
+                               
                                   <strong>
                                     {new String(
                                       nextFixtures.response[
@@ -199,7 +203,7 @@ function App() {
                                   </strong>
                                 </div>
 
-                                <div className="col-3 d-flex align-items-center justify-content-center">
+                                <div className="dg_secondTeam col-6 d-flex align-items-center justify-content-end">
                                   <strong>
                                     {new String(
                                       nextFixtures.response[
@@ -209,9 +213,11 @@ function App() {
                                       ].teams.away.name
                                     ).slice(0, 3)}
                                   </strong>
-                                </div>
-                                <div className="col-3 ps-0  d-flex align-items-center justify-content-center">
+                               
+                                
+                        
                                   <img
+                                  style={{marginLeft:"5px"}}
                                     className="dg_away_logo"
                                     src={
                                       nextFixtures.response[
@@ -329,10 +335,10 @@ function App() {
                     </div>
                   </div>
                   <div>
-                    <TableMobileView teamPosition={standings[0]} />
+                    <TableMobileView unqiue={standings[0].rank} teamPosition={standings[0]} />
                   </div>
                   <div>
-                    <TableMobileView teamPosition={standings[1]} />
+                    <TableMobileView unqiue={standings[1].rank} teamPosition={standings[1]} />
                   </div>
                   {showCompleteStandings && (
                     <>
@@ -340,7 +346,7 @@ function App() {
                         <div key={standing.rank}>
                           {standing.rank >= 3 ? (
                             <div>
-                              <TableMobileView teamPosition={standing} />
+                              <TableMobileView unqiue={standing.rank} teamPosition={standing} />
                             </div>
                           ) : (
                             " "
@@ -353,20 +359,24 @@ function App() {
               </>
             )}
           </MediaQuery>
-          <div className="col-6 text-start mt-2 mb-2 ">
+          <div className="col-12 text-start mt-2 mb-2 ">
             <button
               type="button"
-              className="btn btn-outline-ghost btn-sm"
+              className="btn btn-outline-ghost btn-sm btn_standings"
+              style={{color:"gray" }}
               onClick={(e) => toggleShowCompleteStandings(e)}
             >
-              <span style={{ fontSize: "1vw" }}>
+              <span >
                 Show complete standings...
               </span>
             </button>
           </div>
         </div>
       </div>
+      <div
+      style={{marginTop:"20vw"}}>
       <Footer />
+      </div>
     </>
   );
 

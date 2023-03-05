@@ -14,100 +14,125 @@ div {
   border: 0px solid lightslategrey !important;
 }
 
-
 .statContainer {
-    font-variant: small-caps;
+  font-variant: small-caps;
 }
 
 .standingsContainer {
-    font-variant: normal;
+  font-variant: normal;
 }
 
-
 @media screen and (max-width: 720px) {
-    .parentContainer {
-        max-width: 100%;
-      }
-    img {
-        width: 100%;
-        height: auto;
-        min-width: 4vw;
-      }
-      
-      .logo {
-          width: 100%;
-          height: auto;
-      }
-      
-      .statContainer {
-        font-size: 4vw;
-      }
-      
-      .titleContainer {
-        font-size: 5vw;
-      }
-      
-      .standingsContainer {
-        font-size: 3vw;
-      }
-
-      .tableCell{
-        min-height: 8vw;
-        background-color: #fff2;
-      }
-
-      
-      .footer {
-        font-size: 2vw;
-      }
-
-      .standingsHeader {
-        font-size: 2vw;
-        color: gray;
-      }
+  .parentContainer {
+    max-width: 100%;
   }
+  img {
+    width: 75%;
+    height: auto;
+    min-width: 4vw;
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+  }
+
+  .statContainer {
+    font-size: 4vw;
+  }
+
+  .titleContainer {
+    font-size: 5vw;
+  }
+
+  .standingsContainer {
+    font-size: 3vw;
+  }
+
+  .tableCell {
+    min-height: 8vw;
+    background-color: #fff2;
+  }
+
+  .footer {
+    margin-top: 20px;
+    font-size: 2vw;
+    position: relative;
+    bottom: 0;
+  }
+
+  .standingsHeader {
+    font-size: 2vw;
+    color: gray;
+  }
+
+  .btn_standings {
+    font-size: 1vw;
+  }
+}
+
+.dg_secondTeam {
+  padding-left: 2vw !important;
+
+}
 
 @media screen and (min-width: 720px) {
-    .parentContainer {
-      max-width: 65% !important;
-    }
-
-    img {
-        width: 100%;
-        height: auto;
-        max-width: 2vw;
-      }
-      
-      .logo {
-          width: 100%;
-          height: auto;
-          min-width: 12vw;
-      }
-      
-      .statContainer {
-        font-size: 2vw;
-      }
-      
-      .titleContainer {
-        font-size: 3vw;
-      }
-      
-      .standingsContainer {
-        font-size: 1.5vw;
-      }
-
-      .tableCell{
-        min-height: 3vw;
-        background-color: #fff2;
-      }
-
-      .footer {
-        font-size: 1vw;
-      }
-
-      .standingsHeader {
-        font-size: 1vw;
-        color: gray;
-      }
-      
+  .parentContainer {
+    max-width: 65% !important;
   }
+
+  .dg_secondTeam {
+    padding-left: 1vw !important;
+   width: fit-content !important;
+  }
+  
+
+  img {
+    width: 100%;
+    height: auto;
+    max-width: 2vw;
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+    min-width: 12vw;
+  }
+
+  .statContainer {
+    font-size: 2vw;
+  }
+
+  .titleContainer {
+    font-size: 3vw;
+  }
+
+  .standingsContainer {
+    font-size: 1.5vw;
+  }
+
+  .tableCell {
+    min-height: 3vw;
+    background-color: #fff2;
+  }
+
+  .footer {
+    margin-top: 10px;
+    font-size: 1vw;
+    position: relative;
+    bottom: 0;
+  }
+
+  .standingsHeader {
+    font-size: 1vw;
+    color: gray;
+  }
+}
+
+button.btn_collapse.collapsed {
+  transform: rotate(0);
+}
+
+button.btn_collapse {
+  transform: rotate(180deg);
+}
