@@ -48,7 +48,7 @@ function App() {
   }, [allSeasonData]);
 
   useEffect(() => {
-    if (standings !== undefined) {
+   /*  if (standings !== undefined) {
       let _statKeeperObj: statKeeper = {
         gamesInTotal: standings.length * 2 - 2,
         firstTeam_playedGames: standings[0].all.played,
@@ -79,7 +79,32 @@ function App() {
               (standings.length * 2 - 2 - standings[1].all.played) * 3) -
             standings[0].points) %
           3,
-      };
+      }; */
+      if (standings !== undefined) {
+        const totalGames = standings.length * 2 - 2;
+        const firstTeamPlayed = standings[0].all.played;
+        const secondTeamPlayed = standings[1].all.played;
+        const firstTeamGamesLeft = totalGames - firstTeamPlayed;
+        const secondTeamMaxPoints =
+          standings[1].points + (totalGames - secondTeamPlayed) * 3;
+        const pointsNeeded =
+          1 + secondTeamMaxPoints - standings[0].points; // Points needed to ensure championship
+      
+        // Cap pointsNeeded to what is achievable with games left
+        const achievablePoints = Math.min(pointsNeeded, firstTeamGamesLeft * 3);
+      
+        let _statKeeperObj: statKeeper = {
+          gamesInTotal: totalGames,
+          firstTeam_playedGames: firstTeamPlayed,
+          firstTeam_gamesLeft: firstTeamGamesLeft,
+          diffPoints: standings[0].points - standings[1].points,
+          maxPointsForSec: secondTeamMaxPoints,
+          pointsToReachTotal: 1 + secondTeamMaxPoints,
+          pointsToReachLeft: pointsNeeded,
+          numberOfWins: Math.floor(achievablePoints / 3),
+          numberOfDraws: achievablePoints % 3,
+        };
+            
 
       setStatKeeper(_statKeeperObj);
     }
@@ -119,7 +144,7 @@ function App() {
                   <div className="col-4 d-flex align-items-center justify-content-start ">
                     <a
                       className="logo_link"
-                      href="https://www.google.com/search?q=SSC+napoli+standings&rlz=1C1CSMH_deAT1028AT1028&ei=v83vY5j2POyUxc8P4IGDgAI&ved=0ahUKEwjY0fvpnZ39AhVsSvEDHeDAACAQ4dUDCA8&uact=5&oq=SSC+napoli+standings&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCQgAEBYQHhDxBDIGCAAQFhAeMgUIABCGAzoFCAAQkQI6BAgAEEM6CwguEIAEEMcBENEDOgUILhCABDoLCC4QgAQQxwEQrwFKBAhBGABQAFipH2DRIGgAcAF4AIAB7gGIAdASkgEGNy4xMS4ymAEAoAEBwAEB&sclient=gws-wiz-serp#sie=t;/m/048xg8;2;/m/03zv9;st;fp;1;;;"
+                      href="https://www.google.com/search?q=serie+a&oq=serie+a&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDzSAQc3ODRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#wptab=si:ACC90nyZc0kQnwqEuA-yLPm2QDGaKhGaS4Z8p5LgAbzYfCuxHF9pI5HMbpRaboDlgYmSLxgtd4d9Lukea_lB4gZC_JJgW5v8zBQ802OTXppskvCjKFJ6e228R-6H-hX6bqvnxGYAznEuf9Plp3BEnfd3fMs1NxS2cfzykzwR9pMIuOcj1MT91jM%3D"
                     >
                       <img className="logo" src={standings[0].team.logo}></img>
                     </a>
@@ -142,7 +167,7 @@ function App() {
                       style={{ minHeight: "6vw" }}
                     >
                       <div className="col-6  d-flex align-items-center">
-                        <strong>Wins Left</strong>
+                        <strong>Wins Needed</strong>
                       </div>
                       <div className="col-6  d-flex align-items-center justify-content-end">
                         <strong>
@@ -157,7 +182,7 @@ function App() {
                       style={{ minHeight: "6vw" }}
                     >
                       <div className="col-6  d-flex align-items-center">
-                        <strong>Draws Left</strong>
+                        <strong>Draws Needed</strong>
                       </div>
                       <div className="col-6  d-flex align-items-center justify-content-end">
                         <strong>
@@ -170,10 +195,12 @@ function App() {
                     {nextFixtures &&
                       statKeeper.pointsToReachLeft &&
                       statKeeper.pointsToReachLeft >= 0 && (
+                        
                         <div
                           className="row mb-2 d-flex justify-content-center align-items-center  pb-2"
                           style={{ minHeight: "6vw" }}
                         >
+                          
                           <div className="col-6 d-flex align-items-center">
                             <strong>Decisive Game</strong>
                           </div>
@@ -424,7 +451,7 @@ function App() {
     };
 
     fetch(
-      "https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=135",
+      "https://api-football-v1.p.rapidapi.com/v3/standings?league=135&season=2024",
       options
     )
       .then((response) => response.json())
@@ -451,6 +478,7 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         setNextFixtures(response);
+        console.log(response);
       })
       .catch((err) => console.error(err));
   }

@@ -11,7 +11,7 @@ body {
 test
 */
 div {
-  border: 0px solid lightslategrey !important;
+  border-radius: 5px; /* Rounded corners for a softer look */
 }
 
 .statContainer {
@@ -49,9 +49,12 @@ div {
     font-size: 3vw;
   }
 
+  
   .tableCell {
     min-height: 8vw;
-    background-color: #fff2;
+    background-color: rgba(255, 255, 255, 0.1); /* Softer contrast */
+    border-radius: 5px; /* Rounded cells */
+    padding: 5px; /* Add padding inside cells */
   }
 
   .footer {
@@ -59,6 +62,7 @@ div {
     font-size: 2vw;
     position: relative;
     bottom: 0;
+    text-align: center; /* Center the footer text */
   }
 
   .standingsHeader {
@@ -113,7 +117,9 @@ div {
 
   .tableCell {
     min-height: 3vw;
-    background-color: #fff2;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 10px;
   }
 
   .footer {
@@ -121,6 +127,7 @@ div {
     font-size: 1vw;
     position: relative;
     bottom: 0;
+    text-align: center;
   }
 
   .standingsHeader {
@@ -131,15 +138,16 @@ div {
 
 button.btn_collapse.collapsed {
   transform: rotate(0);
+  transition: transform 0.3s ease; /* Add smooth rotation animation */
 }
 
 button.btn_collapse {
   transform: rotate(180deg);
+  transition: transform 0.3s ease;
 }
 
-
 #congrats {
-  background: linear-gradient(to right, hsl(0, 0%, 30%) 0, hsl(0, 0%, 100%) 10%, hsl(0, 0%, 30%) 20%);
+  background: linear-gradient(to right, hsl(260, 50%, 30%) 0%, hsl(260, 50%, 80%) 50%, hsl(260, 50%, 30%) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 3s infinite linear;
@@ -147,12 +155,11 @@ button.btn_collapse {
 
 @keyframes shine {
   0% {
-    background-position: 0;
+    background-position: -200px;
   }
   60% {
     background-position: 450px;
   }
   100% {
     background-position: 600px;
-  }
-}
+  }}
