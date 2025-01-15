@@ -1,0 +1,187 @@
+body {
+    font-size: medium !important;
+    font-family: "Dosis", sans-serif !important;
+    font-weight: 400 !important;
+    background-color: #2a2e40 !important; /* Deep navy blue for a modern dark mode */
+    color: #e4e4e4 !important; /* Light gray for better readability */
+  }
+  
+  div {
+    border-radius: 5px; /* Rounded corners for a softer look */
+    background-color: #2a2e40; /* Subtle background for divs */
+  }
+  
+  .statContainer {
+    font-variant: small-caps;
+    color: #4dabf7; /* Bright blue for emphasis */
+  }
+  
+  .standingsContainer {
+    font-variant: normal;
+    color: #b0bec5; /* Muted gray-blue for secondary text */
+  }
+  
+  @media screen and (max-width: 720px) {
+    .parentContainer {
+      max-width: 100%;
+    }
+  
+    img {
+      width: 75%;
+      height: auto;
+      min-width: 4vw;
+    }
+  
+    .logo {
+      width: 85%;
+      height: auto;
+    }
+  
+    .statContainer {
+      font-size: 4vw;
+      color: #90caf9; /* Lighter blue for small text */
+    }
+  
+    .titleContainer {
+      font-size: 5vw;
+      color: #ffffff; /* White for strong titles */
+      font-weight: bold;
+    }
+  
+    .standingsContainer {
+      font-size: 3vw;
+      color: #cfd8dc; /* Neutral gray for readability */
+    }
+  
+    .tableCell {
+      min-height: 8vw;
+      background-color: rgba(255, 255, 255, 0.08); /* Softer transparency */
+      border-radius: 5px;
+      padding: 5px;
+      color: #eceff1; /* Off-white for table text */
+    }
+  
+    .footer {
+      margin-top: 20px;
+      font-size: 2vw;
+      position: relative;
+      bottom: 0;
+      text-align: center;
+      color: #90a4ae; /* Subtle gray for footer text */
+    }
+  
+    .standingsHeader {
+      font-size: 2vw;
+      color: #78909c; /* Cool gray for headers */
+    }
+  
+    .btn_standings {
+      font-size: 1vw;
+      color: #ffffff; /* White for button text */
+      background-color: #4dabf7; /* Bright blue for buttons */
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    .btn_standings:hover {
+      background-color: #2196f3; /* Slightly darker blue on hover */
+    }
+  }
+  
+  .dg_secondTeam {
+    padding-left: 2vw !important;
+  }
+  
+  @media screen and (min-width: 720px) {
+    .parentContainer {
+      max-width: 65% !important;
+      margin: 0 auto; /* Center content */
+    }
+  
+    .dg_secondTeam {
+      padding-left: 1vw !important;
+      width: fit-content !important;
+    }
+  
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 2vw;
+    }
+  
+    .logo {
+      width: 85%;
+      height: auto;
+      min-width: 12vw;
+    }
+  
+    .statContainer {
+      font-size: 2vw;
+      color: #4dabf7;
+    }
+  
+    .titleContainer {
+      font-size: 3vw;
+      color: #ffffff;
+      font-weight: bold;
+    }
+  
+    .standingsContainer {
+      font-size: 1.5vw;
+      color: #cfd8dc;
+    }
+  
+    .tableCell {
+      min-height: 3vw;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 5px;
+      padding: 10px;
+      color: #eceff1;
+    }
+  
+    .footer {
+      margin-top: 10px;
+      font-size: 1vw;
+      position: relative;
+      bottom: 0;
+      text-align: center;
+    }
+  
+    .standingsHeader {
+      font-size: 1vw;
+      color: #78909c;
+    }
+  }
+  
+  button.btn_collapse.collapsed {
+    transform: rotate(0);
+    transition: transform 0.3s ease;
+  }
+  
+  button.btn_collapse {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+  
+  #congrats {
+    background: linear-gradient(to right, #4dabf7 0%, #90caf9 50%, #4dabf7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s infinite linear;
+  }
+  
+  @keyframes shine {
+    0% {
+      background-position: -200px;
+    }
+    60% {
+      background-position: 450px;
+    }
+    100% {
+      background-position: 600px;
+    }
+  }
+  

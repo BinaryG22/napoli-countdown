@@ -1,5 +1,5 @@
 const AUTHOR = "Antonio Palumbo";
-const EMAIL = "palumbo.antonio@gmx.de";
+const EMAIL = "toni.antonio.palumbo@gmail.com";
 
 function Footer() {
   return (
